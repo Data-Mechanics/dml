@@ -6,7 +6,7 @@
 ##   Mechanics platform components.
 ##
 ##   Web:     datamechanics.org
-##   Version: 0.0.15.0
+##   Version: 0.0.16.0
 ##
 ##
 
@@ -89,21 +89,25 @@ an appropriate authentication credentials file for third-party services.
 """
 pathToConfig = "../config.json"
 if not os.path.isfile(pathToConfig):
-    raise EnvironmentError(\
-        "No valid configuration file found at '"\
-        + pathToConfig\
-        + "'. All scripts must be located within an immediate "\
-        + "subdirectory of the platform instance root directory."\
-    )
+    pathToConfig = "config.json"
+    if not os.path.isfile(pathToConfig):
+        raise EnvironmentError(\
+            "No valid configuration file found at '"\
+            + "../config.json" + " or " + "config.json"\
+            + "'. All scripts must be located within an immediate "\
+            + "subdirectory of the platform instance root directory."\
+        )
 
 pathToAuth = "../auth.json"
 if not os.path.isfile(pathToAuth):
-    raise EnvironmentError(\
-        "No valid credentials file found at '"\
-        + pathToAuth\
-        + "'. All scripts must be located within an immediate "\
-        + "subdirectory of the platform instance root directory."\
-    )
+    pathToAuth = "auth.json"
+    if not os.path.isfile(pathToAuth):
+        raise EnvironmentError(\
+            "No valid credentials file found at '"\
+                + "../auth.json" + " or " + "auth.json"\
+            + "'. All scripts must be located within an immediate "\
+            + "subdirectory of the platform instance root directory."\
+        )
 auth = json.loads(open(pathToAuth).read())
 
 """
